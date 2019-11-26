@@ -41,4 +41,8 @@ public class ResultsPage {
         result = isOpen() && result;
         return result;
     }
+
+    public boolean verifyFilterCourseCount(int expectedCount) {
+        return coursesCount() == expectedCount;
+    }
 }

@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Industry_Standart_Framework" />
         <module name="Industry Standart Framework" />
       </profile>
     </annotationProcessing>
