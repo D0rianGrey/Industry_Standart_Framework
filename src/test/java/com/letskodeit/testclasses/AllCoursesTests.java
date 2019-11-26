@@ -12,6 +12,11 @@ import java.util.concurrent.TimeUnit;
 public class AllCoursesTests {
     WebDriver driver;
     String baseURL;
+    LoginPage login;
+    NavigationPage nav;
+    SearchBarPage search;
+    ResultsPage result;
+    CategoryFilterPage category;
 
     @BeforeClass
     public void setUp() {
@@ -19,26 +24,25 @@ public class AllCoursesTests {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         baseURL = "https://learn.letskodeit.com";
         driver.get(baseURL);
+        login = new LoginPage(driver);
+        login.open();
+        nav = login.signInWith("test@email.com", "abcabc");
     }
 
     @Test
     public void verifySearchCourse() {
-        LoginPage login = new LoginPage(driver);
-        login.open();
-        NavigationPage nav = login.signInWith("test@email.com", "abcabc");
         nav.allCourses();
-        SearchBarPage search = new SearchBarPage(driver);
-        ResultsPage result = search.course("rest api");
+        search = new SearchBarPage(driver);
+        result = search.course("rest api");
         boolean searchResult = result.verifySearchResult();
         Assert.assertTrue(searchResult);
     }
 
-    @Test(dependsOnMethods = "verifySearchCourse")
+    @Test
     public void filterByCategory() {
-        NavigationPage nav = new NavigationPage(driver);
         nav.allCourses();
-        CategoryFilterPage category = new CategoryFilterPage(driver);
-        ResultsPage result = category.select("Software IT");
+        category = new CategoryFilterPage(driver);
+        result = category.select("Software IT");
         int count = category.findCoursesCount("Software IT");
         boolean filterResult = result.verifyFilterCourseCount(count);
         Assert.assertTrue(filterResult);

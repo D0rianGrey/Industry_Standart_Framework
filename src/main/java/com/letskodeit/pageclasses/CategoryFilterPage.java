@@ -29,28 +29,31 @@ public class CategoryFilterPage {
      * Methods
      */
 
-    public ResultsPage select(String categoryName) {
+    public void clickCategoryDropdown() {
         // Find category dropdown
         WebElement categoryDropdown = driver.findElement(By.xpath(CATEGORY_DROPDOWN));
         categoryDropdown.click();
+    }
+
+    public WebElement findCategory(String categoryName) {
+        clickCategoryDropdown();
         // Wait for the element to be clickable
         WebDriverWait wait = new WebDriverWait(driver, 3);
         WebElement categoryOption = wait.until(
                 ExpectedConditions.elementToBeClickable(
                         By.xpath(String.format(CATEGORY_OPTION, categoryName))));
+        return categoryOption;
+    }
+
+    public ResultsPage select(String categoryName) {
+        WebElement categoryOption = findCategory(categoryName);
         // Used JavaScript click because this element was having issues with usual click method
         js.executeScript("arguments[0].click();", categoryOption);
         return new ResultsPage(driver);
     }
 
     public int findCoursesCount(String categoryName) {
-        // Find category dropdown
-        WebElement categoryDropdown = driver.findElement(By.xpath(CATEGORY_DROPDOWN));
-        categoryDropdown.click();
-        // Wait for the element to be clickable
-        WebDriverWait wait = new WebDriverWait(driver, 3);
-        WebElement categoryOption = wait.until(
-                ExpectedConditions.elementToBeClickable(By.xpath(String.format(CATEGORY_OPTION, categoryName))));
+        WebElement categoryOption = findCategory(categoryName);
         // Get category text
         String categoryText = categoryOption.getText();
         // Split on ( symbol
@@ -63,7 +66,7 @@ public class CategoryFilterPage {
         String courseCountString = arrayTemp[1].split("\\)")[0];
         int courseCount = Integer.parseInt(courseCountString);
         // Click the dropdown again to close the menu
-        categoryDropdown.click();
+        clickCategoryDropdown();
         return courseCount;
     }
 }
