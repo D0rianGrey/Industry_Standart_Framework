@@ -24,8 +24,8 @@ public class AllCoursesTests {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         baseURL = "https://learn.letskodeit.com";
         driver.get(baseURL);
-        login = new LoginPage(driver);
-        login.open();
+        nav = new NavigationPage(driver);
+        login = nav.login();
         nav = login.signInWith("test@email.com", "abcabc");
     }
 

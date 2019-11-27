@@ -15,8 +15,7 @@ public class LoginPage {
      * Locators
      * URL
      */
-    private WebDriver driver;
-    private String LOGIN_LINK = "//a[@href='/sign_in']";
+    public WebDriver driver;
     private String EMAIL_FIELD = "user_email";
     private String PASSWORD_FIELD = "user_password";
     private String LOG_IN_BUTTON = "commit";
@@ -24,10 +23,6 @@ public class LoginPage {
     /***
      * Methods
      */
-
-    public void open(){
-        driver.findElement(By.xpath(LOGIN_LINK)).click();
-    }
 
     public NavigationPage signInWith(String email, String password) {
         WebElement emailField = driver.findElement(By.id(EMAIL_FIELD));
@@ -44,3 +39,4 @@ public class LoginPage {
         return new NavigationPage(driver);
     }
 }
+
