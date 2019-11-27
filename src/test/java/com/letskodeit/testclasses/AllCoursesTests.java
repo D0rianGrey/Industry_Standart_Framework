@@ -50,6 +50,6 @@ public class AllCoursesTests {
 
     @AfterClass
     public void tearDown() {
-        //driver.quit();
+        driver.quit();
     }
 }
