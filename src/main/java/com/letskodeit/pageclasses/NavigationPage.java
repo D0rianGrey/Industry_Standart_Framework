@@ -1,5 +1,6 @@
 package com.letskodeit.pageclasses;
 
+import com.letskodeit.base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -9,9 +10,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
-public class NavigationPage {
+public class NavigationPage extends BasePage {
 
     public NavigationPage(WebDriver driver) {
+        super(driver);
         this.driver = driver;
         js = (JavascriptExecutor) driver;
     }

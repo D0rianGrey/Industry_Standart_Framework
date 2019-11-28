@@ -1,12 +1,14 @@
 package com.letskodeit.pageclasses;
 
+import com.letskodeit.base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class SearchBarPage {
+public class SearchBarPage extends BasePage {
 
     public SearchBarPage(WebDriver driver) {
+        super(driver);
         this.driver = driver;
     }
 

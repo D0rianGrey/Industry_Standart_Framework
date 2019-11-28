@@ -1,31 +1,16 @@
 package com.letskodeit.testclasses;
 
-import com.letskodeit.pageclasses.*;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import com.letskodeit.base.BaseTest;
+import com.letskodeit.pageclasses.CategoryFilterPage;
+import com.letskodeit.pageclasses.SearchBarPage;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import java.util.concurrent.TimeUnit;
 
-public class AllCoursesTests {
-    WebDriver driver;
-    String baseURL;
-    LoginPage login;
-    NavigationPage nav;
-    SearchBarPage search;
-    ResultsPage result;
-    CategoryFilterPage category;
+public class AllCoursesTests extends BaseTest {
 
     @BeforeClass
     public void setUp() {
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        baseURL = "https://learn.letskodeit.com";
-        driver.get(baseURL);
-        nav = new NavigationPage(driver);
-        login = nav.login();
         nav = login.signInWith("test@email.com", "abcabc");
     }
 
@@ -46,10 +31,5 @@ public class AllCoursesTests {
         int count = category.findCoursesCount("Software IT");
         boolean filterResult = result.verifyFilterCourseCount(count);
         Assert.assertTrue(filterResult);
-    }
-
-    @AfterClass
-    public void tearDown() {
-        driver.quit();
     }
 }

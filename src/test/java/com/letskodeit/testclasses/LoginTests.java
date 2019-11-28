@@ -1,29 +1,15 @@
 package com.letskodeit.testclasses;
 
-import com.letskodeit.pageclasses.*;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import com.letskodeit.base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
-
-public class LoginTests {
-    WebDriver driver;
-    String baseURL;
-    LoginPage login;
-    NavigationPage nav;
+public class LoginTests extends BaseTest {
 
     @BeforeClass
     public void setUp() {
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        baseURL = "https://learn.letskodeit.com";
-        driver.get(baseURL);
-        nav = new NavigationPage(driver);
-        login = nav.login();
     }
 
     @AfterMethod
