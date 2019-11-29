@@ -7,8 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.util.concurrent.TimeUnit;
+import java.util.List;
 
 public class NavigationPage extends BasePage {
 
@@ -26,44 +26,46 @@ public class NavigationPage extends BasePage {
     public WebDriver driver;
     private JavascriptExecutor js;
     private final String URL = "https://learn.letskodeit.com/courses";
-    private String ALL_COURSES_LINK = "//a[contains(text(), 'All Courses')]";
-    private String MY_COURSES_LINK = "//a[contains(text(), 'My Courses')]";
-    private String ACCOUNT_ICON = "gravatar";
-    private String LOGIN_LINK = "//a[@href='/sign_in']";
-    private String LOGOUT_LINK = "//a[@href='/sign_out']";
+    private String ALL_COURSES_LINK = "xpath=>//a[contains(text(), 'All Courses')]";
+    private String MY_COURSES_LINK = "xpath=>//a[contains(text(), 'My Courses')]";
+    private String ACCOUNT_ICON = "class=>gravatar";
+    private String LOGIN_LINK = "xpath=>//a[@href='/sign_in']";
+    private String LOGOUT_LINK = "xpath=>//a[@href='/sign_out']";
 
     /***
      * Methods
      */
 
     public void allCourses() {
-        driver.findElement(By.xpath(ALL_COURSES_LINK)).click();
+        elementClick(ALL_COURSES_LINK, "ALL Courses Link");
+        //elementClick(ALL_COURSES_LINK);
     }
 
     public void myCourses() {
-        driver.findElement(By.xpath(MY_COURSES_LINK)).click();
+        elementClick(MY_COURSES_LINK, "My Courses Link");
     }
 
     public boolean isUserLoggedIn() {
         try {
-            WebElement accountImage = driver.findElement(By.className(ACCOUNT_ICON));
-            return true;
+            List<WebElement> accountImage = getElementList(ACCOUNT_ICON, "Account Icon");
+            if (accountImage.size() > 0) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (Exception e) {
             return false;
         }
     }
 
     public LoginPage login() {
-        driver.findElement(By.xpath(LOGIN_LINK)).click();
+        elementClick(LOGIN_LINK, "Login Link");
         return new LoginPage(driver);
     }
 
     public void logout() {
-        driver.findElement(By.className(ACCOUNT_ICON)).click();
-        WebDriverWait wait = new WebDriverWait(driver, 3);
-        WebElement logoutLink = wait.until(
-                ExpectedConditions.elementToBeClickable(By.xpath(LOGOUT_LINK)));
-        //logoutLink.click();
-        js.executeScript("arguments[0].click();", logoutLink);
+        elementClick(ACCOUNT_ICON, "User Account Icon");
+        WebElement logoutLink = waitForElement(LOGOUT_LINK, 10);
+        javascriptClick(logoutLink, "Logout Link");
     }
 }

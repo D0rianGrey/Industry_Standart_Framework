@@ -21,17 +21,17 @@ public class ResultsPage extends BasePage {
      */
     public WebDriver driver;
     private String URL = "query=";
-    private String COURSES_LIST = "//div[@class='course-listing']";
+    private String COURSES_LIST = "xpath=>//div[@class='course-listing']";
 
     /***
      * Methods
      */
     public boolean isOpen() {
-        return driver.getCurrentUrl().contains(URL);
+        return getURL().contains(URL);
     }
 
     public int coursesCount() {
-        List<WebElement> coursesList = driver.findElements(By.xpath(COURSES_LIST));
+        List<WebElement> coursesList = getElementList(COURSES_LIST, "Courses List");
         return coursesList.size();
     }
 

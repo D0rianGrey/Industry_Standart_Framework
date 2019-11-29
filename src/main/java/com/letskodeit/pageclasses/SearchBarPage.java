@@ -18,21 +18,16 @@ public class SearchBarPage extends BasePage {
      * Title
      */
     public WebDriver driver;
-    private String SEARCH_COURSE_FIELD = "search-courses";
-    private String SEARCH_COURSE_BUTTON = "search-course-button";
+    private String SEARCH_COURSE_FIELD = "id=>search-courses";
+    private String SEARCH_COURSE_BUTTON = "id=>search-course-button";
 
     /***
      * Methods
      */
 
     public ResultsPage course(String courseName) {
-        WebElement searchField = driver.findElement(By.id(SEARCH_COURSE_FIELD));
-        searchField.clear();
-        searchField.sendKeys(courseName);
-
-        WebElement searchButton = driver.findElement(By.id(SEARCH_COURSE_BUTTON));
-        searchButton.click();
-
+        sendData(SEARCH_COURSE_FIELD, courseName, "Search Course Field");
+        elementClick(SEARCH_COURSE_BUTTON, "Search Course Button");
         return new ResultsPage(driver);
     }
 }

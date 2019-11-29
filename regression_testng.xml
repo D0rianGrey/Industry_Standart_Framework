@@ -3,7 +3,7 @@
     <test name="Application Test" preserve-order="true">
         <classes>
             <class name="com.letskodeit.testclasses.LoginTests"/>
-            <class name="com.letskodeit.testclasses.AllCoursesTests"/>
+            <!--<class name="com.letskodeit.testclasses.AllCoursesTests"/>-->
         </classes>
     </test>
 </suite>

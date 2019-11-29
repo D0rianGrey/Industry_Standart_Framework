@@ -24,8 +24,8 @@ public class CategoryFilterPage extends BasePage {
      */
     public WebDriver driver;
     private JavascriptExecutor js;
-    private String CATEGORY_DROPDOWN = "(//div[contains(@class,'course-filter')])[1]//button";
-    private String CATEGORY_OPTION = "//a[@href='/courses/category/%s']";
+    private String CATEGORY_DROPDOWN = "xpath=>(//div[contains(@class,'course-filter')])[1]//button";
+    private String CATEGORY_OPTION = "xpath=>//a[@href='/courses/category/%s']";
 
     /***
      * Methods
@@ -33,31 +33,28 @@ public class CategoryFilterPage extends BasePage {
 
     public void clickCategoryDropdown() {
         // Find category dropdown
-        WebElement categoryDropdown = driver.findElement(By.xpath(CATEGORY_DROPDOWN));
-        categoryDropdown.click();
+        elementClick(CATEGORY_DROPDOWN, "Category Dropdown");
     }
 
     public WebElement findCategory(String categoryName) {
         clickCategoryDropdown();
         // Wait for the element to be clickable
-        WebDriverWait wait = new WebDriverWait(driver, 3);
-        WebElement categoryOption = wait.until(
-                ExpectedConditions.elementToBeClickable(
-                        By.xpath(String.format(CATEGORY_OPTION, categoryName))));
+        WebElement categoryOption = waitForElementToBeClickable(
+                String.format(CATEGORY_OPTION, categoryName), 15);
         return categoryOption;
     }
 
     public ResultsPage select(String categoryName) {
         WebElement categoryOption = findCategory(categoryName);
         // Used JavaScript click because this element was having issues with usual click method
-        js.executeScript("arguments[0].click();", categoryOption);
+        javascriptClick(categoryOption, "Category Option");
         return new ResultsPage(driver);
     }
 
     public int findCoursesCount(String categoryName) {
         WebElement categoryOption = findCategory(categoryName);
         // Get category text
-        String categoryText = categoryOption.getText();
+        String categoryText = getText(categoryOption, "Category Option");
         // Split on ( symbol
         // Example: Software IT (2)
         // Value of arrayTemp[0] ->Software IT

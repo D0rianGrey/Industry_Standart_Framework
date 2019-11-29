@@ -6,6 +6,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+
 public class LoginTests extends BaseTest {
 
     @BeforeClass
@@ -14,6 +15,7 @@ public class LoginTests extends BaseTest {
 
     @AfterMethod
     public void afterMethod() {
+        System.out.println("****** After Method ******");
         if (nav.isUserLoggedIn()) {
             nav.logout();
             nav.login();
@@ -23,15 +25,15 @@ public class LoginTests extends BaseTest {
     @Test
     public void testLogin() {
         nav = login.signInWith("test@email.com", "abcabc");
+        //boolean result = nav.verifyHeader();
         boolean result = nav.isUserLoggedIn();
         Assert.assertTrue(result);
     }
 
-    @Test
+    @Test(enabled = false)
     public void testInvalidLogin() {
         nav = login.signInWith("test@email", "abcabc");
         boolean result = nav.isUserLoggedIn();
         Assert.assertFalse(result);
     }
-
 }
