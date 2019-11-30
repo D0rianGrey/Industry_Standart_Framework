@@ -3,7 +3,9 @@ package com.letskodeit.testclasses;
 import com.letskodeit.base.BaseTest;
 import com.letskodeit.pageclasses.CategoryFilterPage;
 import com.letskodeit.pageclasses.SearchBarPage;
+import com.letskodeit.utilities.Constants;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -11,7 +13,7 @@ public class AllCoursesTests extends BaseTest {
 
     @BeforeClass
     public void setUp() {
-        nav = login.signInWith("test@email.com", "abcabc");
+        nav = login.signInWith(Constants.DEFAULT_USERNAME, Constants.DEFAULT_PASSWORD);
     }
 
     @Test
@@ -31,5 +33,10 @@ public class AllCoursesTests extends BaseTest {
         int count = category.findCoursesCount("Software IT");
         boolean filterResult = result.verifyFilterCourseCount(count);
         Assert.assertTrue(filterResult);
+    }
+
+    @AfterClass
+    public void tearDown() {
+        //driver.quit();
     }
 }

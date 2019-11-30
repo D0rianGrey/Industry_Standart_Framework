@@ -168,6 +168,23 @@ public class Util {
         }
     }
 
+    /***
+     * Verify List is not empty
+     * @param actualList - actual list that needs to be verified
+     * @return
+     */
+    public static Boolean verifyListNotEmpty(List actualList) {
+        int listSize = actualList.size();
+        System.out.println("Size of list :: " + listSize);
+        if (listSize > 0) {
+            System.out.println("List is not empty");
+            return true;
+        } else {
+            System.out.println("List is empty");
+            return false;
+        }
+    }
+
     /**
      * Verify actual list contains items of the expected list
      *

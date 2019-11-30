@@ -1,6 +1,7 @@
 package com.letskodeit.pageclasses;
 
 import com.letskodeit.base.BasePage;
+import com.letskodeit.utilities.Util;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -38,7 +39,6 @@ public class NavigationPage extends BasePage {
 
     public void allCourses() {
         elementClick(ALL_COURSES_LINK, "ALL Courses Link");
-        //elementClick(ALL_COURSES_LINK);
     }
 
     public void myCourses() {
@@ -48,14 +48,15 @@ public class NavigationPage extends BasePage {
     public boolean isUserLoggedIn() {
         try {
             List<WebElement> accountImage = getElementList(ACCOUNT_ICON, "Account Icon");
-            if (accountImage.size() > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return Util.verifyListNotEmpty(accountImage);
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public boolean verifyHeader() {
+        WebElement link = getElement(ALL_COURSES_LINK, "All Courses Link");
+        return Util.verifyTextContains(link.getText(), "All Coursesesss");
     }
 
     public LoginPage login() {
