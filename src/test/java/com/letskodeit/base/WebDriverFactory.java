@@ -1,6 +1,8 @@
 package com.letskodeit.base;
 
 import com.letskodeit.utilities.Constants;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -13,6 +15,7 @@ import org.openqa.selenium.remote.CapabilityType;
 import java.util.concurrent.TimeUnit;
 
 public class WebDriverFactory {
+    private static final Logger log = LogManager.getLogger(WebDriverFactory.class.getName());
     // Singleton
     // Only one instance of the class can exist at a time
     private static final WebDriverFactory instance = new WebDriverFactory();
@@ -75,7 +78,7 @@ public class WebDriverFactory {
     private void setDriver(String browser) {
         String driverPath = "";
         String os = Constants.OS_NAME.toLowerCase().substring(0, 3);
-        System.out.println("OS Name from system property :: " + os);
+        log.info("OS Name from system property :: " + os);
         String directory = Constants.USER_DIRECTORY + Constants.DRIVERS_DIRECTORY;
         String driverKey = "";
         String driverValue = "";
@@ -90,11 +93,11 @@ public class WebDriverFactory {
             driverKey = Constants.IE_DRIVER_KEY;
             driverValue = Constants.IE_DRIVER_VALUE;
         } else {
-            System.out.println("Browser type not supported");
+            log.info("Browser type not supported");
         }
 
         driverPath = directory + driverValue + (os.equals("win") ? ".exe" : "");
-        System.out.println("Driver Binary :: " + driverPath);
+        log.info("Driver Binary :: " + driverPath);
         System.setProperty(driverKey, driverPath);
     }
 
