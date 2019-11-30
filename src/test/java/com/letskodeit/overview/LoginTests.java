@@ -1,6 +1,5 @@
 package com.letskodeit.overview;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,7 +17,6 @@ public class LoginTests {
 
     @BeforeClass
     public void beForeClass() {
-        WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         baseURL = "https://learn.letskodeit.com";

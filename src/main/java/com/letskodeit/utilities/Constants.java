@@ -17,4 +17,6 @@ public class Constants {
     public static final String IE_DRIVER_VALUE = "IEDriverServer";
     public static final String DEFAULT_USERNAME = "test@email.com";
     public static final String DEFAULT_PASSWORD = "abcabc";
+    public static final String EXCEL_FILE= USER_DIRECTORY + "//src//main//resources//testdata//ExcelTestData.xlsx";
+
 }
