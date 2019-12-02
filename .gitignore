@@ -1,10 +1,4 @@
 # Created by .ignore support plugin (hsz.mobi)
 .gitignore
-target/generated-sources/
-target/generated-test-sources/
-/test-output/screenshots/
-target/classes/com/letskodeit/utilities/Constants.class
-target/classes/testdata/
-target/test-classes/com/letskodeit/base/CheckPoint.class
-target/test-classes/com/letskodeit/base/WebDriverFactory.class
-target/test-classes/com/letskodeit/overview/ExcelReadExample.class
+
+/target/
