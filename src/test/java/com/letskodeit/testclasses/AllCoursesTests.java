@@ -21,27 +21,27 @@ public class AllCoursesTests extends BaseTest {
 
     @BeforeClass
     public void setUp() {
-        nav = login.signInWith(Constants.DEFAULT_USERNAME, Constants.DEFAULT_PASSWORD);
+        navigationPage = login.signInWith(Constants.DEFAULT_USERNAME, Constants.DEFAULT_PASSWORD);
         ExcelUtility.setExcelFile(Constants.EXCEL_FILE,"AllCoursesTests");
     }
 
 
     @Test(dataProvider = "verifySearchCourseData")
     public void verifySearchCourse(String courseName) {
-        nav.allCourses();
-        search = new SearchBarPage(driver);
-        result = search.course(courseName);
-        boolean searchResult = result.verifySearchResult();
+        navigationPage.allCourses();
+        searchBarPage = new SearchBarPage(driver);
+        resultsPage = searchBarPage.course(courseName);
+        boolean searchResult = resultsPage.verifySearchResult();
         Assert.assertTrue(searchResult);
     }
 
     @Test(enabled = false)
     public void filterByCategory() {
-        nav.allCourses();
-        category = new CategoryFilterPage(driver);
-        result = category.select("Software IT");
-        int count = category.findCoursesCount("Software IT");
-        boolean filterResult = result.verifyFilterCourseCount(count);
+        navigationPage.allCourses();
+        categoryFilterPage = new CategoryFilterPage(driver);
+        resultsPage = categoryFilterPage.select("Software IT");
+        int count = categoryFilterPage.findCoursesCount("Software IT");
+        boolean filterResult = resultsPage.verifyFilterCourseCount(count);
         Assert.assertTrue(filterResult);
     }
 

@@ -30,7 +30,6 @@ public class CustomDriver {
     private JavascriptExecutor js;
 
     public CustomDriver() {
-
     }
 
     public CustomDriver(WebDriver driver) {

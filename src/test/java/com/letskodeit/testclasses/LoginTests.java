@@ -18,25 +18,25 @@ public class LoginTests extends BaseTest {
     @AfterMethod
     public void afterMethod() {
         System.out.println("****** After Method ******");
-        if (nav.isUserLoggedIn()) {
-            nav.logout();
-            nav.login();
+        if (navigationPage.isUserLoggedIn()) {
+            navigationPage.logout();
+            navigationPage.login();
         }
     }
 
     @Test
     public void testLogin() {
-        nav = login.signInWith(Constants.DEFAULT_USERNAME, Constants.DEFAULT_PASSWORD);
-        boolean headerResult = nav.verifyHeader();
+        navigationPage = login.signInWith(Constants.DEFAULT_USERNAME, Constants.DEFAULT_PASSWORD);
+        boolean headerResult = navigationPage.verifyHeader();
         CheckPoint.mark("test-01", headerResult, "header verification");
-        boolean result = nav.isUserLoggedIn();
+        boolean result = navigationPage.isUserLoggedIn();
         CheckPoint.markFinal("test-01", result, "login verification");
     }
 
     @Test(enabled = false)
     public void testInvalidLogin() {
-        nav = login.signInWith(Constants.DEFAULT_USERNAME, Constants.DEFAULT_PASSWORD);
-        boolean result = nav.isUserLoggedIn();
+        navigationPage = login.signInWith(Constants.DEFAULT_USERNAME, Constants.DEFAULT_PASSWORD);
+        boolean result = navigationPage.isUserLoggedIn();
         Assert.assertFalse(result);
     }
 }
